@@ -54,9 +54,9 @@ public class DbgUtils {
 	}
 
 	public static String[] sepClassAndMthSig(String fullSig) {
-		int pos = fullSig.indexOf("(");
+		int pos = fullSig.indexOf('(');
 		if (pos != -1) {
-			pos = fullSig.lastIndexOf(".", pos);
+			pos = fullSig.lastIndexOf('.', pos);
 			if (pos != -1) {
 				String[] sigs = new String[2];
 				sigs[0] = fullSig.substring(0, pos);
@@ -154,7 +154,7 @@ public class DbgUtils {
 			return null;
 		}
 		ApplicationParams results = parser.parse();
-		String mainActivityName = results.getMainActivityName();
+		String mainActivityName = results.getMainActivity();
 		if (mainActivityName == null) {
 			UiUtils.errorMessage(mw, NLS.str("adb_dialog.msg_read_mani_fail"));
 			return null;
@@ -163,7 +163,7 @@ public class DbgUtils {
 			UiUtils.errorMessage(mw, "Invalid main activity name");
 			return null;
 		}
-		JavaClass mainActivityClass = results.getMainActivity(decompiler);
+		JavaClass mainActivityClass = results.getMainActivityJavaClass(decompiler);
 		if (mainActivityClass == null) {
 			UiUtils.errorMessage(mw, NLS.str("error_dialog.not_found", "Main activity class"));
 			return null;

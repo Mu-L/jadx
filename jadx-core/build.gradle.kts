@@ -5,9 +5,9 @@ plugins {
 dependencies {
 	api(project(":jadx-plugins:jadx-input-api"))
 
-	implementation("com.google.code.gson:gson:2.10.1")
+	implementation("com.google.code.gson:gson:2.11.0")
 
-	testImplementation("org.apache.commons:commons-lang3:3.14.0")
+	testImplementation("org.apache.commons:commons-lang3:3.16.0")
 
 	testImplementation(project(":jadx-plugins:jadx-dex-input"))
 	testRuntimeOnly(project(":jadx-plugins:jadx-smali-input"))
