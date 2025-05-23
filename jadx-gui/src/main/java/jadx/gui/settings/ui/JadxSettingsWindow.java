@@ -186,6 +186,7 @@ public class JadxSettingsWindow extends JDialog {
 		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		buttonPane.add(resetBtn);
+		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
 		buttonPane.add(copyBtn);
 		buttonPane.add(Box.createHorizontalGlue());
 		buttonPane.add(saveBtn);
@@ -234,6 +235,13 @@ public class JadxSettingsWindow extends JDialog {
 			needReload();
 		});
 
+		JCheckBox useHeaders = new JCheckBox();
+		useHeaders.setSelected(settings.isUseHeadersForDetectResourceExtensions());
+		useHeaders.addItemListener(e -> {
+			settings.setUseHeadersForDetectResourceExtension(e.getStateChange() == ItemEvent.SELECTED);
+			needReload();
+		});
+
 		JComboBox<GeneratedRenamesMappingFileMode> generatedRenamesMappingFileModeCB =
 				new JComboBox<>(GeneratedRenamesMappingFileMode.values());
 		generatedRenamesMappingFileModeCB.setSelectedItem(settings.getGeneratedRenamesMappingFileMode());
@@ -265,6 +273,7 @@ public class JadxSettingsWindow extends JDialog {
 		deobfGroup.addRow(NLS.str("preferences.deobfuscation_min_len"), minLenSpinner);
 		deobfGroup.addRow(NLS.str("preferences.deobfuscation_max_len"), maxLenSpinner);
 		deobfGroup.addRow(NLS.str("preferences.deobfuscation_res_name_source"), resNamesSource);
+		deobfGroup.addRow(NLS.str("preferences.deobfuscation_res_use_headers"), useHeaders);
 		deobfGroup.addRow(NLS.str("preferences.generated_renames_mapping_file_mode"), generatedRenamesMappingFileModeCB);
 		deobfGroup.addRow(NLS.str("preferences.deobfuscation_whitelist"),
 				NLS.str("preferences.deobfuscation_whitelist.tooltip"), editWhitelistedEntities);
@@ -637,6 +646,10 @@ public class JadxSettingsWindow extends JDialog {
 		update.setSelected(settings.isCheckForUpdates());
 		update.addItemListener(e -> settings.setCheckForUpdates(e.getStateChange() == ItemEvent.SELECTED));
 
+		JCheckBox disableTooltipOnHover = new JCheckBox();
+		disableTooltipOnHover.setSelected(settings.isDisableTooltipOnHover());
+		disableTooltipOnHover.addItemListener(e -> settings.setDisableTooltipOnHover(e.getStateChange() == ItemEvent.SELECTED));
+
 		JCheckBox cfg = new JCheckBox();
 		cfg.setSelected(settings.isCfgOutput());
 		cfg.addItemListener(e -> {
@@ -676,6 +689,7 @@ public class JadxSettingsWindow extends JDialog {
 		group.addRow(NLS.str("preferences.xposed_codegen_language"), xposedCodegenLanguage);
 		group.addRow(NLS.str("preferences.check_for_updates"), update);
 		group.addRow(NLS.str("preferences.update_channel"), updateChannel);
+		group.addRow(NLS.str("preferences.disable_tooltip_on_hover"), disableTooltipOnHover);
 		return group;
 	}
 

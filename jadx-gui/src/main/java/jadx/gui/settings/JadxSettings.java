@@ -69,6 +69,7 @@ public class JadxSettings extends JadxCLIArgs {
 	private Path lastSaveFilePath = USER_HOME;
 	private boolean flattenPackage = false;
 	private boolean checkForUpdates = true;
+	private boolean disableTooltipOnHover = false;
 	private List<Path> recentProjects = new ArrayList<>();
 	private String fontStr = "";
 	private String smaliFontStr = "";
@@ -242,6 +243,14 @@ public class JadxSettings extends JadxCLIArgs {
 	public void setCheckForUpdates(boolean checkForUpdates) {
 		this.checkForUpdates = checkForUpdates;
 		sync();
+	}
+
+	public boolean isDisableTooltipOnHover() {
+		return disableTooltipOnHover;
+	}
+
+	public void setDisableTooltipOnHover(boolean disableTooltipOnHover) {
+		this.disableTooltipOnHover = disableTooltipOnHover;
 	}
 
 	public List<Path> getRecentProjects() {
@@ -444,6 +453,10 @@ public class JadxSettings extends JadxCLIArgs {
 
 	public void setResourceNameSource(ResourceNameSource source) {
 		this.resourceNameSource = source;
+	}
+
+	public void setUseHeadersForDetectResourceExtension(boolean enable) {
+		this.useHeadersForDetectResourceExtensions = enable;
 	}
 
 	public void updateRenameFlag(JadxArgs.RenameEnum flag, boolean enabled) {
