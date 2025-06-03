@@ -44,9 +44,9 @@ dependencies {
 	implementation("org.apache.commons:commons-text:1.13.1")
 	implementation("commons-io:commons-io:2.19.0")
 
-	implementation("io.reactivex.rxjava2:rxjava:2.2.21")
-	implementation("com.github.akarnokd:rxjava2-swing:0.3.7")
-	implementation("com.android.tools.build:apksig:8.9.2")
+	implementation("io.reactivex.rxjava3:rxjava:3.1.10")
+	implementation("com.github.akarnokd:rxjava3-swing:3.1.1")
+	implementation("com.android.tools.build:apksig:8.10.0")
 	implementation("io.github.skylot:jdwp:2.0.0")
 
 	// Library for hex viewing data
@@ -228,10 +228,10 @@ val copyDistWinWithJre by tasks.registering(Copy::class) {
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-val addNewNLSLines by tasks.registering(JavaExec::class) {
+val syncNLSLines by tasks.registering(JavaExec::class) {
 	group = "jadx-dev"
-	description = "Utility task to add new/missing translation lines"
+	description = "Utility task to sync new/missing translation using EN as a reference"
 
 	classpath = sourceSets.main.get().runtimeClasspath
-	mainClass.set("jadx.gui.utils.tools.NLSAddNewLines")
+	mainClass.set("jadx.gui.utils.tools.SyncNLSLines")
 }
